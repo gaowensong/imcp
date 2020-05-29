@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imcp.basic.mapper.RoleMapper">
+    <insert id="addRole" parameterType="Role" >
+        insert into Role(id,guid,rolaName,status,remark) values(#{id},#{guid},#{rolaName},#{status},#{remark})
+    </insert>
+    <delete id="delRole" parameterType="String">
+        delete from Role where guid = #{guid}
+    </delete>
+
+    <update id="updateRole" parameterType="Role">
+        update Role
+        <set>
+            <if test="rolaName != null">rolaName = #{rolaName},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="remark != null">remark =#{remark},</if>
+        </set>
+        where guid = #{guid}
+    </update>
+
+    <select id="queryRole" parameterType="String" resultType="Role">
+        select id,guid,rolaName,status,remark from Role where guid = #{guid}
+    </select>
+
+    <select id="getAllRole" resultType="List">
+        select * from Role
+    </select>
+</mapper>
